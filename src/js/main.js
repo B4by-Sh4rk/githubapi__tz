@@ -7,8 +7,6 @@ form.addEventListener('submit', async (e) => {
     if(inputValue != ''){
         const queryString = 'q=' + encodeURIComponent(`${inputValue} in:name`);
     const response = await fetch(`https://api.github.com/search/repositories?${queryString}/per_page=10`);
-    console.log(response);
-    console.log(inputValue);
 
     if(response.ok){
         const data = await response.json();
@@ -20,7 +18,6 @@ form.addEventListener('submit', async (e) => {
         const inputText = document.querySelector('#search__input');
         inputText.value = '';
         if(unsearcherH1.classList == 'disp-none'){
-            console.log('ok');
         }else{
             unsearcherH1.classList.add('disp-none');
             inputText.value = '';
@@ -34,13 +31,11 @@ form.addEventListener('submit', async (e) => {
 
 
 function createResultCard(repoResp, i){
-    console.log(repoResp.total_count);
     if(repoResp.total_count == 0){
         const unsearcherH1 = document.querySelector('#unsearched');
         unsearcherH1.classList.remove('disp-none');
         return;
     }else{
-        console.log(repoResp.items[i]);
         const resultCard = document.createElement('div');
         resultCard.classList.add('result-card');
         const titileUrl = document.createElement('a');
